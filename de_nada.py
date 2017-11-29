@@ -2,10 +2,10 @@ import unicodedata, re
 
 DE_NADA_REGEXES = tuple(re.compile(r, re.IGNORECASE) for r in
     (
-        r'de\s+nada',
-        r'disponha',
-        r'por\s+nada',
-        r'nao\s+ha\s+de\s+que',
+        r'\bde\b\s+\bnada\b',
+        r'\bdisponha\b',
+        r'\bpor\b\s+\bnada\b',
+        r'\bnao\b\s+\bha\b\s+\bde\b\s+\bque\b',
     )
 )
 

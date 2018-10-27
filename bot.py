@@ -7,6 +7,8 @@ import stickers
 SEND_MESSAGE_TIMEOUT = 30
 STICKER_TIMEOUT = 120
 
+de_nada_links = None # Inicializado no main
+
 def load_file(filename):
     with open(filename, 'r') as file_content:
         return [m.strip() for m in file_content.readlines()]
@@ -105,7 +107,7 @@ def update_on_allowed_group(bot, update):
     if update.message and de_nada.has_de_nada(update.message.text):
         bot.send_message(
             chat_id=update.effective_chat.id,
-            text='https://youtu.be/oIfXG_kscH4',
+            text=de_nada_links.get_link(),
             reply_to_message_id=update.message.message_id,
             timeout=SEND_MESSAGE_TIMEOUT)
 
@@ -130,6 +132,7 @@ def error_callback(bot, update, error):
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO,
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    de_nada_links = de_nada.Links()
     token = load_token()
     masters = load_masters()
     allowed_groups = load_allowed_groups()

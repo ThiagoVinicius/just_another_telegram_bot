@@ -4,18 +4,10 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+ddt = "*"
 
 [packages]
-asn1crypto = "==0.24.0"
-certifi = "==2018.10.15"
-cffi = "==1.11.5"
-cryptography = "==2.3.1"
-ddt = "==1.2.0"
-future = "==0.17.0"
-idna = "==2.7"
-pycparser = "==2.19"
-python-telegram-bot = "==11.1.0"
-six = "==1.11.0"
+python-telegram-bot = "~=12.8"
 
 [requires]
-python_version = "3.6"
+python_version = "3.8.3"

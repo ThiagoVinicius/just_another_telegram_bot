@@ -1,5 +1,6 @@
 import telegram.ext
 from telegram.ext.dispatcher import run_async
+import telegram
 import logging
 import de_nada
 import stickers
@@ -48,7 +49,8 @@ def allowed_group_filter(allowed_groups):
     group = Filters.group
     return chat & group
 
-def chat_with_sticker(bot, update):
+def chat_with_sticker(update: telegram.Update, context: telegram.ext.CallbackContext):
+    bot = context.bot
     set_name = update.message.sticker.set_name
     print('Recebi um sticker.')
     if set_name:
@@ -86,7 +88,8 @@ def async_send_message(bot, *args, **kwargs):
     bot.send_message(*args, **kwargs)
 
 @run_async
-def chat_from_master(bot, update):
+def chat_from_master(update: telegram.Update, context: telegram.ext.CallbackContext):
+    bot = context.bot
     print('Falando com o mestre')
     bot.send_message(
         chat_id=update.message.chat_id,
@@ -94,7 +97,8 @@ def chat_from_master(bot, update):
         timeout=SEND_MESSAGE_TIMEOUT)
 
 @run_async
-def chat_from_strangers(bot, update):
+def chat_from_strangers(update: telegram.Update, context: telegram.ext.CallbackContext):
+    bot = context.bot
     print('Falando com um estranho')
     bot.send_message(
         chat_id=update.message.chat_id,
@@ -102,7 +106,8 @@ def chat_from_strangers(bot, update):
         timeout=SEND_MESSAGE_TIMEOUT)
 
 @run_async
-def update_on_allowed_group(bot, update):
+def update_on_allowed_group(update: telegram.Update, context: telegram.ext.CallbackContext):
+    bot = context.bot
     print('Estou em um grupo permitido %s' % update.effective_chat)
     if update.message and de_nada.has_de_nada(update.message.text):
         bot.send_message(
@@ -112,7 +117,8 @@ def update_on_allowed_group(bot, update):
             timeout=SEND_MESSAGE_TIMEOUT)
 
 @run_async
-def strange_group_update(bot, update):
+def strange_group_update(update: telegram.Update, context: telegram.ext.CallbackContext):
+    bot = context.bot
     print('Deixando chat (effective_chat = %s)' % update.effective_chat)
     bot.send_message(
         chat_id=update.effective_chat.id,
@@ -121,12 +127,12 @@ def strange_group_update(bot, update):
     update.effective_chat.leave()
 
 @run_async
-def unhandled_update(bot, update):
+def unhandled_update(update: telegram.Update, context: telegram.ext.CallbackContext):
     print('Nao sei o que fazer com esse: %s' % update)
 
 @run_async
-def error_callback(bot, update, error):
-    print('Ocorreu um erro não tratado: %s' % error)
+def error_callback(update: telegram.Update, context: telegram.ext.CallbackContext):
+    print('Ocorreu um erro não tratado: %s' % context.error)
 
 
 if __name__ == '__main__':
@@ -137,7 +143,7 @@ if __name__ == '__main__':
     masters = load_masters()
     allowed_groups = load_allowed_groups()
 
-    updater = telegram.ext.Updater(token)
+    updater = telegram.ext.Updater(token, use_context=True)
     register_handlers(updater.dispatcher, masters, allowed_groups)
     updater.start_polling()
     updater.idle()

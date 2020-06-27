@@ -4,14 +4,18 @@ import telegram
 import logging
 import de_nada
 import stickers
+import os.path
 
 SEND_MESSAGE_TIMEOUT = 30
 STICKER_TIMEOUT = 120
 
 de_nada_links = None # Inicializado no main
 
-def load_file(filename):
-    with open(filename, 'r') as file_content:
+BASE_CONFIG_DIR = 'config'
+
+def load_file(filename, basename=BASE_CONFIG_DIR):
+    fullpath = os.path.join(basename, filename)
+    with open(fullpath, 'r') as file_content:
         return [m.strip() for m in file_content.readlines()]
 
 def load_token():
@@ -138,7 +142,7 @@ def error_callback(update: telegram.Update, context: telegram.ext.CallbackContex
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO,
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    de_nada_links = de_nada.Links()
+    de_nada_links = de_nada.Links(os.path.join(BASE_CONFIG_DIR, 'de_nada.links'))
     token = load_token()
     masters = load_masters()
     allowed_groups = load_allowed_groups()

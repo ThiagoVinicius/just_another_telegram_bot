@@ -1,59 +1,41 @@
-FROM --platform=linux/arm/v6 arm32v6/alpine:latest AS stage1
+FROM --platform=linux/arm/v6 arm32v6/python:3.8.3-alpine AS build1
 
-RUN apk update
-RUN apk add --no-cache git bash build-base libffi-dev openssl-dev bzip2-dev zlib-dev readline-dev sqlite-dev
+RUN apk -U upgrade
+RUN apk add build-base libffi-dev openssl-dev
 
 RUN adduser python_user --disabled-password
-#RUN ln -s /proc/self/fd /dev/fd
-
-WORKDIR /home/python_user
 USER python_user
+WORKDIR /home/python_user
 
-RUN git clone git://github.com/pyenv/pyenv.git .pyenv
+ENV PIP_NO_CACHE_DIR false
+ENV PIP_USER true
+ENV PATH /home/python_user/.local/bin:$PATH
 
-ENV HOME /home/python_user
-ENV PYENV_ROOT $HOME/.pyenv
-ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
-ENV PYTHON_BUILD_CACHE_PATH $PYENV_ROOT/.cache
-ENV LANG C.UTF-8
-
-RUN mkdir $PYTHON_BUILD_CACHE_PATH
-COPY cache $PYENV_ROOT/.cache/
-
-#RUN env PYTHON_CFLAGS="-Os" pyenv install 3.8.3
-RUN env PYTHON_CONFIGURE_OPTS="--enable-optimizations" pyenv install 3.8.3
-RUN pyenv global 3.8.3
-RUN pyenv rehash
 RUN pip install --upgrade pip
 RUN pip install pipenv
 
-RUN rm -r $PYTHON_BUILD_CACHE_PATH
+RUN mkdir app
+WORKDIR app
+COPY Pipfile Pipfile.lock ./
 
-COPY *.py bot/
-COPY Pipfile Pipfile.lock bot/
-
-WORKDIR bot
-
-RUN pipenv install --deploy --python 3.8.3
+RUN pipenv install --deploy
 
 
 
-FROM --platform=linux/arm/v6 arm32v6/alpine:latest
+FROM --platform=linux/arm/v6 arm32v6/python:3.8.3-alpine
 
-RUN apk update
-RUN apk add --no-cache bash libffi openssl bzip2 zlib readline sqlite
+RUN apk -U upgrade
+RUN apk add libffi openssl
 
 RUN adduser python_user --disabled-password
-
 USER python_user
 
-ENV HOME /home/python_user
-ENV PYENV_ROOT $HOME/.pyenv
-ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
-ENV LANG C.UTF-8
+ENV PATH /home/python_user/.local/bin:$PATH
 
-COPY --from=stage1 /home/python_user /home/python_user
+COPY --from=build1 /home/python_user /home/python_user
 
-WORKDIR /home/python_user/bot
+WORKDIR /home/python_user/app
+
+COPY . .
 
 ENTRYPOINT [ "pipenv", "run", "python", "bot.py" ]

@@ -1,0 +1,6 @@
+config/
+sticker_set_db/
+tests/
+.git/
+data/
+Dockerfile

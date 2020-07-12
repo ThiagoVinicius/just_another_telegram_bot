@@ -3,6 +3,8 @@ import os.path
 import io
 import hashlib
 
+PERSISTENT_STORAGE_PATH = 'data', 'persistent'
+
 def _download_sticker_set(bot, set_id, timeout):
     packed_output = io.BytesIO()
     stickerset = bot.get_sticker_set(set_id)
@@ -30,7 +32,7 @@ def _send_existing(bot, chat_id, file_id):
 
 def _upload_id_filename(set_id):
     digest = hashlib.sha256(bytes(set_id, 'utf-8')).hexdigest()
-    return os.path.join('sticker_set_db', digest)
+    return os.path.join(*PERSISTENT_STORAGE_PATH, 'sticker_set_db', digest)
 
 def _store_upload_id(set_id, file_id):
     file_name = _upload_id_filename(set_id)

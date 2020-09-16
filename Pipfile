@@ -11,4 +11,4 @@ python-telegram-bot = "~=12.8"
 
 [requires]
 python_version = "3.8"
-full_python_version = "3.8.3"
+full_python_version = "3.8.4"

@@ -1,4 +1,4 @@
-FROM --platform=linux/arm/v6 arm32v6/python:3.8.4-alpine AS base-os
+FROM --platform=linux/arm/v6 arm32v6/python:3.10.4-alpine3.16 AS base-os
 
 RUN apk -U upgrade --no-cache
 
@@ -11,17 +11,15 @@ RUN adduser python_user --disabled-password
 WORKDIR /home/python_user/app
 RUN chown python_user:python_user .
 
-ONBUILD ENV PATH /home/python_user/.local/bin:$PATH
 
 
 
 FROM --platform=linux/arm/v6 user-setup AS dependencies-setup
 
+ENV PATH /home/python_user/.local/bin:$PATH
+
 # Dependencias em tempo de construcao
 RUN apk add --no-cache build-base libffi-dev openssl-dev
-
-# Dependencias em tempo de execucão
-ONBUILD apk add --no-cache libffi openssl
 
 USER python_user
 
@@ -39,6 +37,11 @@ RUN pipenv install --deploy
 
 
 FROM --platform=linux/arm/v6 user-setup AS app-setup
+
+ENV PATH /home/python_user/.local/bin:$PATH
+
+# Dependencias em tempo de execucão
+RUN apk add --no-cache libffi openssl
 
 COPY --from=dependencies-setup /home/python_user /home/python_user
 COPY --chown=python_user:python_user . .

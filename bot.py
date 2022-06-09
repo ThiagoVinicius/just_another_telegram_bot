@@ -118,7 +118,7 @@ def update_on_allowed_group(update: telegram.Update, context: telegram.ext.Callb
         shorts_ids = shorts.find_shorts_ids(update.message)
 
         if shorts_ids:
-            bot.send_message(**common_params,
+            bot.send_message(**common_params, disable_web_page_preview=True,
                 text='\n'.join(shorts.create_normal_url(id) for id in shorts_ids))
 
 def strange_group_update(update: telegram.Update, context: telegram.ext.CallbackContext):

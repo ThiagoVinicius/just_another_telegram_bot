@@ -27,7 +27,7 @@ def find_shorts_ids(message):
 def _find_shorts_id(url):
     parsed = urllib.parse.urlsplit(url)
 
-    isYoutube = parsed.netloc == 'youtube.com'
+    isYoutube = parsed.netloc == 'youtube.com' or parsed.netloc.endswith('.youtube.com')
     isShorts = '/shorts/' in parsed.path
 
     if isYoutube and isShorts:

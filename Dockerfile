@@ -1,4 +1,4 @@
-FROM --platform=linux/arm/v6 arm32v6/python:3.10.4-alpine3.16 AS base-os
+FROM --platform=linux/arm/v6 arm32v6/python:3.10.7-alpine3.16 AS base-os
 
 RUN apk -U upgrade --no-cache
 

@@ -1,11 +1,11 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "5aa09b72569d94b2230ec0b93abd79d2e52b3957eb03f15e0dbed407352a31cc"
+            "sha256": "257faf3d966da8d28fe8c0775648676979eb4ba2c4a4d556ff2b47cf1223206a"
         },
         "pipfile-spec": 6,
         "requires": {
-            "full_python_version": "3.10.4",
+            "full_python_version": "3.10.7",
             "python_version": "3.10"
         },
         "sources": [
@@ -34,28 +34,26 @@
         },
         "certifi": {
             "hashes": [
-                "sha256:9c5705e395cd70084351dd8ad5c41e65655e08ce46f2ec9cf6c2c08390f71eb7",
-                "sha256:f1d53542ee8cbedbe2118b5686372fb33c297fcd6379b050cca0ef13a597382a"
+                "sha256:0d9c601124e5a6ba9712dbc60d9c53c21e34f5f641fe83002317394311bdce14",
+                "sha256:90c1a32f1d68f940488354e36370f6cca89f0f106db09518524c88d6ed83f382"
             ],
             "markers": "python_version >= '3.6'",
-            "version": "==2022.5.18.1"
+            "version": "==2022.9.24"
         },
         "python-telegram-bot": {
             "hashes": [
-                "sha256:08246ecccbb0e7b2ac43d3b545c3bdabc71194b20be9620cd0ed96a2eb66820d",
-                "sha256:327186c56469216207dcdf8706892e58e0a62e51ef46f5143268e387bbb4edc3",
-                "sha256:7eebed539ccacf77896cff9e41d1f68746b8ff3ca4da1e2e59285e9c749cb050",
-                "sha256:daf55fb6f418b8752317fd12df824dd717e3229a87d83810a4cdd6e442f66de5"
+                "sha256:79abc66355af2310bbaaf7f41746230b996434e287f21f27070c92978dc0964f",
+                "sha256:e9391d43eb1123de2677a9d24ea878a9d5327d65b2419afba653f476d26aecc3"
             ],
             "index": "pypi",
-            "version": "==13.12"
+            "version": "==13.14"
         },
         "pytz": {
             "hashes": [
-                "sha256:1e760e2fe6a8163bc0b3d9a19c4f84342afa0a2affebfaa84b01b978a02ecaa7",
-                "sha256:e68985985296d9a66a881eb3193b0906246245294a881e7c8afe623866ac6a5c"
+                "sha256:220f481bdafa09c3955dfbdddb7b57780e9a94f5127e35456a48589b9e0c0197",
+                "sha256:cea221417204f2d1a2aa03ddae3e867921971d0d76f14d87abb4414415bbdcf5"
             ],
-            "version": "==2022.1"
+            "version": "==2022.2.1"
         },
         "pytz-deprecation-shim": {
             "hashes": [
@@ -67,11 +65,11 @@
         },
         "setuptools": {
             "hashes": [
-                "sha256:68e45d17c9281ba25dc0104eadd2647172b3472d9e01f911efa57965e8d51a36",
-                "sha256:a43bdedf853c670e5fed28e5623403bad2f73cf02f9a2774e91def6bda8265a7"
+                "sha256:a8f6e213b4b0661f590ccf40de95d28a177cd747d098624ad3f69c40287297e9",
+                "sha256:c2d2709550f15aab6c9110196ea312f468f41cd546bceb24127a1be6fdcaeeb1"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==62.3.2"
+            "version": "==65.4.0"
         },
         "six": {
             "hashes": [
@@ -130,11 +128,11 @@
         },
         "tzdata": {
             "hashes": [
-                "sha256:238e70234214138ed7b4e8a0fab0e5e13872edab3be586ab8198c407620e2ab9",
-                "sha256:8b536a8ec63dc0751342b3984193a3118f8fca2afe25752bb9b7fffd398552d3"
+                "sha256:21f4f0d7241572efa7f7a4fdabb052e61b55dc48274e6842697ccdf5253e5451",
+                "sha256:c3119520447d68ef3eb8187a55a4f44fa455f30eb1b4238fa5691ba094f2b05b"
             ],
             "markers": "python_version >= '3.6'",
-            "version": "==2022.1"
+            "version": "==2022.2"
         },
         "tzlocal": {
             "hashes": [
@@ -148,11 +146,11 @@
     "develop": {
         "ddt": {
             "hashes": [
-                "sha256:78976df724bbf70e8f8c488094184fd778ce3212deb0070481b4db44d5e0fb38",
-                "sha256:daad6bc5fc7619e5aa7eed6c394e05bf82946160a13e5df2e26de176cbaf347e"
+                "sha256:e3c93b961a108b4f4d5a6c7f2263513d928baf3bb5b32af8e1c804bfb041141d",
+                "sha256:f71b348731b8c78c3100bffbd951a769fbd439088d1fdbb3841eee019af80acd"
             ],
             "index": "pypi",
-            "version": "==1.5.0"
+            "version": "==1.6.0"
         }
     }
 }

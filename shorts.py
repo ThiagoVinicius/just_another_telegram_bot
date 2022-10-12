@@ -4,7 +4,7 @@ import urllib.parse
 
 import telegram
 
-SHORTS_ID_PATTERN = re.compile('.+' + re.escape('shorts/') + r'(\w+)')
+SHORTS_ID_PATTERN = re.compile('.+' + re.escape('shorts/') + r'(.+)')
 
 URL = telegram.MessageEntity.URL
 TEXT_LINK = telegram.MessageEntity.TEXT_LINK
